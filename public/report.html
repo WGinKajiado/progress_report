@@ -1,0 +1,652 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./styles.css" rel="stylesheet">
+</head>
+
+<body class="text-gray-600 bg-gray-200">
+    <div><!-- content wrapper -->
+        <div> <!-- navigation Edit report & Preview -->
+            <nav> 
+                <div class="flex flex-col sm:flex-row p-5 bg-gray-50 shadow-md">
+                    <div class="flex-1 ml-24">
+                        <h1 class="text-2xl"> Construction Progress Report Generator </h1>
+                        <h3 class="text-lg">  Weekly site progress documentation system </h3>
+                    </div>
+
+                    <!-- Log out button -->
+                    <div class="px-5 py-4 flex justify-center mr-0 md:mr-20 text-red-500">
+                        <a  href="index.html" 
+                            class="border-4 rounded-full py-2 px-3 uppercase text-xs font-bold 
+                                    cursor-pointer tracking-wider">
+                            Log out
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Edit report -->
+                <div class="pt-4 flex">
+                    <ul class="flex items-center ml-24 rounded-full ring ring-gray-400">
+                        <li class="px-5 py-4 flex">
+                            <a  href="report.html" 
+                                class="border-4 rounded-full py-2 px-4 uppercase text-xs font-bold bg-white shadow-xl ring ring-gray-400
+                                        cursor-pointer tracking-wider">
+                                Edit Report
+                            </a>
+                        </li>
+                        <li class="px-5 py-4 flex text-gray-500">
+                            <a  href="preview.html" 
+                                class="border rounded-full py-2 px-4 uppercase text-xs font-bold 
+                                        cursor-pointer tracking-wider">
+                                Preview
+                            </a>
+                        </li>
+                                              
+                    </ul>
+                </div>
+
+                <div class="p-2"></div>
+                
+            </nav> 
+        </div> <!-- end nav -->
+    </div> <!-- end content wrapper -->
+
+    <main class="px-8 ml-20 mr-20">
+        
+        <form id="reportForm">
+            <!-- SECTION 01---------------------- Basic information -->
+            <div class="bg-white shadow-xl rounded-xl p-6 ring ring-gray-400"> 
+                <div class="ml-4">
+                    <h2 class="text-2xl">Report Details</h2>
+                    <h3 class="text-lg">Basic information for this progress report</h3>
+                </div>
+
+                <div> 
+                    
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+
+                            <div class="grid p-4">
+                                <label for="pj_name">Project Name</label>
+                                <input  type="text" 
+                                        id="pj_name" 
+                                        name="pj_name" 
+                                        required 
+                                        class="bg-gray-200 rounded-md p-2"
+                                >
+                            </div>
+                            
+                            <div class="grid p-4">
+                                <label for="wk_ending">Week Ending</label>
+                                <input  type="date" 
+                                        id="wk_ending" 
+                                        name="wk_ending" 
+                                        class="bg-gray-200 rounded-md p-2"
+                                >
+                            </div>
+                            
+                            <div class="grid p-4">
+                                <label for="rpt_no">Report Number</label>
+                                <input  type="text" 
+                                        id="rpt_no" 
+                                        name="rpt_no" 
+                                        required 
+                                        class="bg-gray-200 rounded-md p-2"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Error Message -->
+                        <p id="ErrorMsg" class="text-red-500 text-sm text-center hidden">These fields need to be filled first</p>
+
+                         
+                        <button type="submit" class="bg-blue-600 hover:bg-black text-white font-semibold rounded-lg p-3 transition">
+                            Submit Data
+                        </button>
+                    
+
+                </div> <!-- end basic information -->
+            </div>
+
+            <!-- SECTION 02---------------------- Work Progress section -->
+            <div class="bg-white shadow-xl rounded-xl p-6 mt-6 ring ring-gray-400">
+                <div class="grid grid-cols-6">
+                    <ul class="ml-4 col-span-4">
+                        <li><h2 class="text-2xl">Work Progress</h2></li>
+                        <h3 class="text-lg">Track progress</h3>
+                    </ul>
+
+                    <div class="col-span-1 text-center content-center"> 
+                        <button disabled ="button" 
+                                class="rounded-full py-3 px-4 uppercase
+                                        bg-black text-white hover:bg-gray-700 text-xs font-bold 
+                                        cursor-pointer tracking-wider" 
+                                        >
+                                        Add Section
+                        </button>
+                    </div>
+                </div>
+
+                <div class="m-4">
+                    <!-- Work Progress sub-Section 01 -->
+                     <div class="ring ring-gray-400 rounded-xl p-6"> 
+                        <div id="progressSectionsContainer" class="space-y-6 mt-6">
+                            <!-- <form id="reportForm"> -->
+                                <div>                            
+                                    <input  
+                                        type="text"
+                                        id="section_head1"
+                                        name="section_head1"
+                                        placeholder="New Section e.g. Preliminaries/ Substructure/ Superstructure/ Building Works/ Plumbing Works/ Landscaping"
+                                        class="w-full bg-gray-200 rounded-md p-2
+                                                focus:outline focus:ring-3 focus:ring-gray-400"
+                                    >
+                                </div>
+
+                                <hr class="my-2 border-gray-300">
+        
+                                <div id="newactivityWrapper1" class="flex flex-col gap-2">
+                                    <!-- Container for activity 01 -->
+                                        <div class="activitiesContainer flex flex-col sm:flex-row gap-4"> 
+                                            <!-- Activity input -->
+                                            <div class="flex-1 pt-2">
+                                                <input  type="text"
+                                                        id="activity1"
+                                                        name="activity1"
+                                                        placeholder="New Activity e.g. Hoarding/ Excavation works/"
+                                                        class="w-full bg-gray-200 rounded-md p-2 focus:outline focus:ring-3 focus:ring-gray-400"
+                                                >
+                                            </div>
+        
+                                            <!-- Percentage Input + Delete Button -->
+                                            <div class="flex items-center gap-2 pt-2">
+                                                <input  type="number" 
+                                                        id="percentage1" 
+                                                        name="percentage1" 
+                                                        value="0" 
+                                                        min="0" max="100"
+                                                        placeholder="0%"
+                                                        class="w-20 bg-gray-200 rounded-md p-2 focus:outline focus:ring-3 focus:ring-gray-400"
+                                                >
+
+                                                <span class="text-2xl text-gray-700">%</span>
+        
+                                                <button disabled type="button"
+                                                        value="Delete"
+                                                        class="bg-red-600 hover:bg-red-700 text-white rounded-md px-3 py-1 transition cursor-pointer"
+                                                        onclick="this.closest('.activitiesContainer').remove()"
+                                                    >
+                                                        Delete
+                                                </button>
+                                            </div>
+        
+                                        </div><!-- end of activity 01-->
+
+                                <div id="newactivityWrapper2" class="flex flex-col gap-2">
+                                    <!-- Container for activity 02 -->
+                                        <div class="activitiesContainer flex flex-col sm:flex-row gap-4"> 
+                                            <!-- Activity input -->
+                                            <div class="flex-1 pt-2">
+                                                <input  type="text"
+                                                        id="activity2"
+                                                        name="activity2"
+                                                        placeholder="New Activity e.g. Hoarding/ Excavation works/"
+                                                        class="w-full bg-gray-200 rounded-md p-2 focus:outline focus:ring-3 focus:ring-gray-400"
+                                                >
+                                            </div>
+        
+                                            <!-- Percentage Input + Delete Button -->
+                                            <div class="flex items-center gap-2 pt-2">
+                                                <input  type="number" 
+                                                        id="percentage2" 
+                                                        name="percentage2" 
+                                                        value="0" 
+                                                        min="0" max="100"
+                                                        placeholder="0%"
+                                                        class="w-20 bg-gray-200 rounded-md p-2 focus:outline focus:ring-3 focus:ring-gray-400"
+                                                >
+
+                                                <span class="text-2xl text-gray-700">%</span>
+        
+                                                <button disabled type="button"
+                                                        value="Delete"
+                                                        class="bg-red-600 hover:bg-red-700 text-white rounded-md px-3 py-1 transition cursor-pointer"
+                                                        onclick="this.closest('.activitiesContainer').remove()"
+                                                    >
+                                                        Delete
+                                                </button>
+                                            </div>
+        
+                                        </div><!-- end of activity 02 -->
+
+                                <div id="newactivityWrapper3" class="flex flex-col gap-2">
+                                    <!-- Container for activity 03 -->
+                                        <div class="activitiesContainer flex flex-col sm:flex-row gap-4"> 
+                                            <!-- Activity input -->
+                                            <div class="flex-1 pt-2">
+                                                <input  type="text"
+                                                        id="activity3"
+                                                        name="activity3"
+                                                        placeholder="New Activity e.g. Hoarding/ Excavation works/"
+                                                        class="w-full bg-gray-200 rounded-md p-2 focus:outline focus:ring-3 focus:ring-gray-400"
+                                                >
+                                            </div>
+        
+                                            <!-- Percentage Input + Delete Button -->
+                                            <div class="flex items-center gap-2 pt-2">
+                                                <input  type="number" 
+                                                        id="percentage3" 
+                                                        name="percentage3" 
+                                                        value="0" 
+                                                        min="0" max="100"
+                                                        placeholder="0%"
+                                                        class="w-20 bg-gray-200 rounded-md p-2 focus:outline focus:ring-3 focus:ring-gray-400"
+                                                >
+
+                                                <span class="text-2xl text-gray-700">%</span>
+        
+                                                <button disabled type="button"
+                                                        value="Delete"
+                                                        class="bg-red-600 hover:bg-red-700 text-white rounded-md px-3 py-1 transition cursor-pointer"
+                                                        onclick="this.closest('.activitiesContainer').remove()"
+                                                    >
+                                                        Delete
+                                                </button>
+                                            </div>
+        
+                                        </div><!-- end of activity 03 -->
+
+                                <div id="newactivityWrapper4" class="flex flex-col gap-2">
+                                    <!-- Container for activity 04 -->
+                                        <div class="activitiesContainer flex flex-col sm:flex-row gap-4"> 
+                                            <!-- Activity input -->
+                                            <div class="flex-1 pt-2">
+                                                <input  type="text"
+                                                        id="activity4"
+                                                        name="activity4"
+                                                        placeholder="New Activity e.g. Hoarding/ Excavation works/"
+                                                        class="w-full bg-gray-200 rounded-md p-2 focus:outline focus:ring-3 focus:ring-gray-400"
+                                                >
+                                            </div>
+        
+                                            <!-- Percentage Input + Delete Button -->
+                                            <div class="flex items-center gap-2 pt-2">
+                                                <input  type="number" 
+                                                        id="percentage4" 
+                                                        name="percentage4" 
+                                                        value="0" 
+                                                        min="0" max="100"
+                                                        placeholder="0%"
+                                                        class="w-20 bg-gray-200 rounded-md p-2 focus:outline focus:ring-3 focus:ring-gray-400"
+                                                >
+
+                                                <span class="text-2xl text-gray-700">%</span>
+        
+                                                <button disabled type="button"
+                                                        value="Delete"
+                                                        class="bg-red-600 hover:bg-red-700 text-white rounded-md px-3 py-1 transition cursor-pointer"
+                                                        onclick="this.closest('.activitiesContainer').remove()"
+                                                    >
+                                                        Delete
+                                                </button>
+                                            </div>
+        
+                                        </div><!-- end of activity 04 -->
+                                </div>
+    
+                                <div class="pt-4">
+                                    <button disabled class="w-full ring ring-gray-300 rounded-md p-1" 
+                                            onclick="addProgressActivity()"
+                                    >
+                                        + Add Activity
+                                    </button>
+                                </div>
+                            
+                        </div>
+                    </div> <!-- end work sub -->
+
+                </br>
+
+                    <!-- Work Progress sub-Section 02 -->
+                     <div class="ring ring-gray-400 rounded-xl p-6"> 
+                        <div id="progressSectionsContainer" class="space-y-6 mt-6">
+                            <!-- <form id="reportForm"> -->
+                                <div>                            
+                                    <input  
+                                        type="text"
+                                        id="section_head2"
+                                        name="section_head2"
+                                        placeholder="New Section e.g. Preliminaries/ Substructure/ Superstructure/ Building Works/ Plumbing Works/ Landscaping"
+                                        class="w-full bg-gray-200 rounded-md p-2
+                                                focus:outline focus:ring-3 focus:ring-gray-400"
+                                    >
+                                </div>
+
+                                <hr class="my-2 border-gray-300">
+        
+                                <div id="newactivityWrapper5" class="flex flex-col gap-2">
+                                    <!-- Container for all activity 05 -->
+                                        <div class="activitiesContainer flex flex-col sm:flex-row gap-4"> 
+                                            <!-- Activity input -->
+                                            <div class="flex-1 pt-2">
+                                                <input  type="text"
+                                                        id="activity5"
+                                                        name="activity5"
+                                                        placeholder="New Activity e.g. Hoarding/ Excavation works/"
+                                                        class="w-full bg-gray-200 rounded-md p-2 focus:outline focus:ring-3 focus:ring-gray-400"
+                                                >
+                                            </div>
+        
+                                            <!-- Percentage Input + Delete Button -->
+                                            <div class="flex items-center gap-2 pt-2">
+                                                <input  type="number" 
+                                                        id="percentage5" 
+                                                        name="percentage5" 
+                                                        value="0" 
+                                                        min="0" max="100"
+                                                        placeholder="0%"
+                                                        class="w-20 bg-gray-200 rounded-md p-2 focus:outline focus:ring-3 focus:ring-gray-400"
+                                                >
+
+                                                <span class="text-2xl text-gray-700">%</span>
+        
+                                                <button disabled type="button"
+                                                        value="Delete"
+                                                        class="bg-red-600 hover:bg-red-700 text-white rounded-md px-3 py-1 transition cursor-pointer"
+                                                        onclick="this.closest('.activitiesContainer').remove()"
+                                                    >
+                                                        Delete
+                                                </button>
+                                            </div>
+        
+                                        </div><!-- end of activity 05-->
+                                </div>
+    
+                                <div class="pt-4">
+                                    <button disabled class="w-full ring ring-gray-300 rounded-md p-1" 
+                                            onclick="addProgressActivity()"
+                                    >
+                                        + Add Activity
+                                    </button>
+                                </div>
+                            
+                        </div>
+                    </div> <!-- end work sub -->
+
+                </div> <!-- end progress section -->
+            </div>
+        </br>
+            
+        <!-- SECTION 03---------------------- Upcoming Works section -->
+        <div class="bg-white shadow-xl rounded-xl p-6 ring ring-gray-400">
+            <div class="p-2">
+                <ul class="ml-4">
+                    <li><h2 class="text-2xl">Upcoming Works</h2></li>
+                    <li><h3 class="text-lg">Planned activities for the next two weeks</h3></li>
+                </ul>
+            </div>
+
+            <div id="upcomingContainer" class="p-6 flex flex-col sm:flex-row">
+                <!-- <form id="reportForm" class="flex flex-col sm:flex-row gap-4 w-full"> -->
+                    <!-- First week -->
+                    <div class="flex-1">
+                        <label for="upcomingHead1" class="text-lg">First week</label>                            
+                        <textarea  
+                            id="upcomingHead1"
+                            name="upcomingHead1"
+                            placeholder="Describe the planned work..."
+                            rows="6"
+                            class="w-full bg-gray-200 rounded-md p-2
+                                    focus:outline focus:ring-3 focus:ring-gray-400">
+                        </textarea>
+                    </div>
+
+                    <!-- Second week -->
+                    <div class="flex-1">
+                        <label for="upcomingHead2" class="text-lg">Second week</label>                            
+                        <textarea  
+                            id="upcomingHead2"
+                            name="upcomingHead2"
+                            placeholder="Describe the planned work..."
+                            rows="6"
+                            class="w-full bg-gray-200 rounded-md p-2
+                                    focus:outline focus:ring-3 focus:ring-gray-400">
+                        </textarea>
+                    </div>
+                
+            </div>
+        </div>
+
+        </br>
+
+        <!-- SECTION 04---------------------- Tradesmen section -->
+        <div class="bg-white shadow-xl rounded-xl p-6 ring ring-gray-400">
+            <div class="grid grid-cols-6 p-2">
+                <div class="col-span-4">
+                    <ul class="ml-4">
+                        <li><h2 class="text-2xl">Tradesmen on Site</h2></li>
+                        <li><h3 class="text-lg">Current workforce breakdown - Total: 25 workers</h3></li>
+                    </ul>
+                </div>
+            
+                <div class="content-center"> 
+                    <button disabled type="button" 
+                            class="rounded-full py-3 px-4 uppercase
+                                    bg-black text-white hover:bg-gray-700 text-xs font-bold 
+                                    cursor-pointer tracking-wider" 
+                                    onclick="addSection()">
+                                    + Add Trade
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3">
+                <!-- Trademen Card here 01 -->
+                <div id="tradesContainer1" class="m-4 ml-2">
+                    <!-- <form id="reportForm" class="w-full"> -->
+
+                    <div class="m-4 p-4 rounded-md ring ring-gray-400">
+                        <div class="flex items-center gap-2 mb-4">
+                            <input id="tradeType1"
+                                    name="tradeType1"
+                                    type="text" 
+                                    placeholder="Trade Type"
+                                    class="flex-1 bg-gray-200 rounded-md p-2
+                                                focus:outline focus2:ring-3 focus:ring-gray-400"> 
+                        
+                            <button disabled type="button" 
+                                    class="bg-red-600 hover:bg-red-700 text-white rounded-md px-3 py-1 transition cursor-pointer" 
+                                    onclick="deleteTrade(this)">Delete
+                            </button>
+                        </div>
+
+                        <div class="flex-1 items-center gap-2">
+                            <label for="workers">Number of Workers</label>
+                        <input 
+                                type="number"
+                                id="workers1" 
+                                name="workers1"
+                                class="flex-1 bg-gray-200 rounded-md p-2 w-20 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trademen Card here 02 -->
+                <div id="tradesContainer2" class="m-4">
+                    <!-- <form id="reportForm" class="w-full"> -->
+
+                    <div class="m-4 p-4 rounded-md ring ring-gray-400">
+                        <div class="flex items-center gap-2 mb-4">
+                            <input id="tradeType2"
+                                    name="tradeType2"
+                                    type="text" 
+                                    placeholder="Trade Type"
+                                    class="flex-1 bg-gray-200 rounded-3md p-2
+                                                focus:outline focus:ring-3 focus:ring-gray-400"> 
+                        
+                            <button disabled type="button" 
+                                    class="bg-red-600 hover:bg-red-700 text-white rounded-md px-3 py-1 transition cursor-pointer" 
+                                    onclick="deleteTrade(this)">Delete
+                            </button>
+                        </div>
+
+                        <div class="flex-1 items-center gap-2 ">
+                            <label for="workers">Number of Workers</label>
+                        <input 
+                                type="number"
+                                id="workers2" 
+                                name="workers2"
+                                class="flex-1 bg-gray-200 rounded-md p-2 w-20 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trademen Card here 03 -->
+                <div id="tradesContainer3" class="m-4">
+                    <!-- <form id="reportForm" class="w-full"> -->
+
+                    <div class="m-4 p-4 rounded-md ring ring-gray-400">
+                        <div class="flex items-center gap-2 mb-4">
+                            <input id="tradeType3"
+                                    name="tradeType3"
+                                    type="text" 
+                                    placeholder="Trade Type"
+                                    class="flex-1 bg-gray-200 rounded-md p-2
+                                                focus:outline focus:ring-3 focus:ring-gray-400"> 
+                        
+                            <button disabled type="button" 
+                                    class="bg-red-600 hover:bg-red-700 text-white rounded-md px-3 py-1 transition cursor-pointer" 
+                                    onclick="deleteTrade(this)">Delete
+                            </button>
+                        </div>
+
+                        <div class="flex-1 items-center gap-2 ">
+                            <label for="workers">Number of Workers</label>
+                        <input 
+                                type="number"
+                                id="workers3" 
+                                name="workers3"
+                                class="flex-1 bg-gray-200 rounded-md p-2 w-20 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trademen Card here 04 -->
+                <div id="tradesContainer4" class="m-4 ml-2">
+                    <!-- <form id="reportForm" class="w-full"> -->
+
+                    <div class="m-4 p-4 rounded-md ring ring-gray-400">
+                        <div class="flex items-center gap-2 mb-4">
+                            <input id="tradeType4"
+                                    name="tradeType4"
+                                    type="text" 
+                                    placeholder="Trade Type"
+                                    class="flex-1 bg-gray-200 rounded-md p-2
+                                                focus:outline focus:ring-3 focus:ring-gray-400"> 
+                        
+                            <button disabled type="button" 
+                                    class="bg-red-600 hover:bg-red-700 text-white rounded-md px-3 py-1 transition cursor-pointer" 
+                                    onclick="deleteTrade(this)">Delete
+                            </button>
+                        </div>
+
+                        <div class="flex-1 items-center gap-2 ">
+                            <label for="workers">Number of Workers</label>
+                        <input 
+                                type="number"
+                                id="workers4" 
+                                name="workers4"
+                                class="flex-1 bg-gray-200 rounded-md p-2 w-20 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+        <!-- Preview container -->
+        <div id="previewContainer" style="display:none; background:#fff; padding:10px; border:1px solid #aaa; margin-top:20px;">
+            <h2>Preview of Report Details</h2>
+        <div id="previewContent"></div>
+        <button onclick="hidePreview()">Close Preview</button>
+        </div>
+    </form>
+        <footer>
+            <p class="m-4 text-center">&copy; 2025 My Website. All rights reserved.</p>
+        </footer>
+    </main>
+
+<script>
+document.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const ErrorMsg = document.getElementById("ErrorMsg");
+
+    // Explicitly get forms by ID
+    const reportForm = document.getElementById("reportForm");
+
+    // Read main fields
+    const projectName = reportForm.pj_name.value.trim();
+    const weekEnding  = reportForm.wk_ending.value.trim();
+    const reportNo    = reportForm.rpt_no.value.trim();
+
+    // Validate required fields
+    if (projectName === "" || reportNo === "") {
+        ErrorMsg.classList.remove("hidden");
+        return;
+    }
+
+    ErrorMsg.classList.add("hidden");
+
+    // Gather all values into a single object
+    const userData = {
+        projectName,
+        weekEnding,
+        reportNo,
+
+        // Work section 1
+        section1_head: reportForm.section_head1.value.trim(),
+        activity1: reportForm.activity1.value.trim(),
+        percentage1: reportForm.percentage1.value.trim(),
+        activity2: reportForm.activity2.value.trim(),
+        percentage2: reportForm.percentage2.value.trim(),
+        activity3: reportForm.activity3.value.trim(),
+        percentage3: reportForm.percentage3.value.trim(),
+        activity4: reportForm.activity4.value.trim(),
+        percentage4: reportForm.percentage4.value.trim(),
+
+        // Work section 2
+        section2_head: reportForm.section_head2.value.trim(),
+        activity5: reportForm.activity5.value.trim(),
+        percentage5: reportForm.percentage5.value.trim(),
+
+        // Upcoming works
+        upcomingWeek1: reportForm.upcomingHead1.value.trim(),
+        upcomingWeek2: reportForm.upcomingHead2.value.trim(),
+
+        // Tradesmen
+        trade1: reportForm.tradeType1.value.trim(),
+        workers1: reportForm.workers1.value.trim(),
+
+        trade2: reportForm.tradeType2.value.trim(),
+        workers2: reportForm.workers2.value.trim(),
+
+        trade3: reportForm.tradeType3.value.trim(),
+        workers3: reportForm.workers3.value.trim(),
+
+        trade4: reportForm.tradeType4.value.trim(),
+        workers4: reportForm.workers4.value.trim(),
+    };
+
+    // Save
+    localStorage.setItem("user", JSON.stringify(userData));
+
+    // Navigate to preview
+    window.location.href = "preview.html";
+});
+
+</script>
+
+</body>
+</html>

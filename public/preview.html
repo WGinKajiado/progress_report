@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./styles.css" rel="stylesheet">
+</head>
+
+<body class="text-grey-600 bg-gray-200">
+    <div><!-- content wrapper -->
+        <div> <!-- navigation Edit report & Preview -->
+            <nav> 
+                <div class="flex flex-col sm:flex-row p-5 bg-gray-50 shadow-md">
+                    <div class="flex-1 ml-24">
+                        <h1 class="text-2xl"> Construction Progress Report Generator </h1>
+                        <h3 class="text-lg">  Weekly site progress documentation system </h3>
+                    </div>
+
+                    <!-- Log out button -->
+                    <div class="px-5 py-4 flex justify-center mr-0 md:mr-20 text-red-500">
+                        <a  href="index.html" 
+                            class="border-4 rounded-full py-2 px-3 uppercase text-xs font-bold 
+                                    cursor-pointer tracking-wider">
+                            Log out
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Edit report -->
+                <div class="pt-4 flex">
+                    <ul class="flex items-center ml-24 rounded-full ring ring-gray-400">
+                        <li class="px-5 py-4 flex text-gray-500">
+                            <a  href="report.html" 
+                                class="border rounded-full py-2 px-4 uppercase text-xs font-bold 
+                                        cursor-pointer tracking-wider">
+                                Edit Report
+                            </a>
+                        </li>
+                        <li class="px-5 py-4 flex">
+                            <a  href="preview.html" 
+                                class="border-4 rounded-full py-2 px-4 uppercase text-xs font-bold bg-white shadow-xl ring ring-gray-400
+                                        cursor-pointer tracking-wider">
+                                Preview
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="p-6 ml-24">
+                    <a  href="#" onclick="window.print()"
+                        class="border-4 rounded-full py-2 px-3 uppercase text-xs font-bold 
+                               bg-white cursor-pointer tracking-wider">
+                        Print Report
+                    </a>
+                </div>
+            </nav> 
+        </div> <!-- end nav -->
+    </div> <!-- end content wrapper -->
+
+  <main class="px-8 ml-6 mr-6">
+      <div class="bg-white shadow-xl rounded-xl p-6">
+
+          <h2 class="text-2xl font-bold text-blue-600">Report Summary</h2>
+          <hr class="my-4">
+
+          <div id="previewContainer" class="space-y-6">
+              <!-- dynamic preview will be injected here -->
+          </div>
+
+      </div>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const previewContainer = document.getElementById("previewContainer");
+
+    // Get saved data
+    const data = JSON.parse(localStorage.getItem("user"));
+
+    if (!data) {
+        previewContainer.innerHTML = `
+            <p class="text-red-500 text-lg">No saved report data found.</p>
+        `;
+        return;
+    }
+
+    // Build preview HTML
+    const html = `
+        <!-- Report Details -->
+        <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-700">Report Details</h3>
+            
+            <div><strong>Project Name:</strong> 
+            <div> ${data.projectName}</div>
+
+            <div><strong>Week Ending:</strong></div>
+            <div>${data.weekEnding}</div>
+
+            <div><strong>Report Number:</strong> </div>
+            <div>${data.reportNo}</div>
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Work Progress Section 1 -->
+        <div>
+            <h3 class="text-xl font-semibold text-gray-700">Work Progress: Section 1</h3>
+            <p><strong>Section Title:</strong> ${data.section1_head}</p>
+
+            <ul class="list-disc ml-6">
+                <li>${data.activity1} – ${data.percentage1}%</li>
+                <li>${data.activity2} – ${data.percentage2}%</li>
+                <li>${data.activity3} – ${data.percentage3}%</li>
+                <li>${data.activity4} – ${data.percentage4}%</li>
+            </ul>
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Work Progress Section 2 -->
+        <div>
+            <h3 class="text-xl font-semibold text-gray-700">Work Progress: Section 2</h3>
+            <p><strong>Section Title:</strong> ${data.section2_head}</p>
+
+            <ul class="list-disc ml-6">
+                <li>${data.activity5} – ${data.percentage5}%</li>
+            </ul>
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Upcoming Works -->
+        <div>
+            <h3 class="text-xl font-semibold text-gray-700">Upcoming Works</h3>
+
+            <p class="mt-2"><strong>First Week:</strong><br>${data.upcomingWeek1}</p>
+            <p class="mt-2"><strong>Second Week:</strong><br>${data.upcomingWeek2}</p>
+        </div>
+
+        <hr class="my-4">
+
+        <!-- Tradesmen -->
+        <div>
+            <h3 class="text-xl font-semibold text-gray-700">Tradesmen On Site</h3>
+
+            <ul class="list-disc ml-6">
+                <li>${data.trade1} – ${data.workers1} workers</li>
+                <li>${data.trade2} – ${data.workers2} workers</li>
+                <li>${data.trade3} – ${data.workers3} workers</li>
+                <li>${data.trade4} – ${data.workers4} workers</li>
+            </ul>
+        </div>
+    `;
+
+    previewContainer.innerHTML = html;
+});
+</script>
+
+
+</body>
+</html>
