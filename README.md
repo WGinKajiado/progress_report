@@ -22,7 +22,7 @@ A web-based tool for generating weekly construction site progress reports. This 
 
 ## Demo
 
-![image](https://github.com/WGinKajiado/progress_report/blob/main/public/assets/screenshot.jpg?raw=true)# index.html
+![image](https://github.com/WGinKajiado/progress_report/blob/main/assets/screenshot.jpg?raw=true)# index.html
 
 ---
 
@@ -58,5 +58,5 @@ A web-based tool for generating weekly construction site progress reports. This 
 
 
 ### Live Release
-Live  : <a href="https://wginkajiado.github.io/ /">View Here</a>
+Live  : <a href="https://wginkajiado.github.io/progress_report/">View Here</a>
 
