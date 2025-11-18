@@ -22,7 +22,7 @@ A web-based tool for generating weekly construction site progress reports. This 
 
 ## Demo
 
-![image](https://github.com/WGinKajiado/portfolio/blob/main/assets/landing_page.jpg?raw=true)# index.html
+![image](https://github.com/WGinKajiado/progress_report/blob/main/public/assets/screenshot.jpg?raw=true)# index.html
 
 ---
 
@@ -42,9 +42,9 @@ A web-based tool for generating weekly construction site progress reports. This 
 
 ## Technologies
 
-- **HTML5 & CSS3**  
+- **HTML & CSS**  
 - **Tailwind CSS** for styling  
-- **Vanilla JavaScript** for dynamic content and localStorage management  
+- **JavaScript** for localStorage management 
 
 ---
 
